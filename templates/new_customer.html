@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Customer</title>
+
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>New Customer:</h1>
+
+    <!-- Add your form for entering new customer details -->
+    <form action="/add_customer" method="post">
+        <label for="first_name">First Name:</label>
+        <input type="text" name="first_name" required><br>
+
+        <label for="last_name">Last Name:</label>
+        <input type="text" name="last_name" required><br>
+
+        <label for="email">Email:</label>
+        <input type="email" name="email" required><br>
+
+        <label for="instance_id">Instance ID:</label>
+        <input type="text" name="instance_id" required><br>
+
+        <label for="aws_access_key">AWS Access Key:</label>
+        <input type="text" name="aws_access_key" required><br>
+
+        <label for="aws_secret_key">AWS Secret Key:</label>
+        <input type="text" name="aws_secret_key" required><br>
+
+        <label for="aws_region">AWS Region:</label>
+        <input type="text" name="aws_region" required><br>
+
+        <!-- Add the Backup Retention Period (Days) input field -->
+        <label for="retention_period">Backup Retention Period (Days):</label>
+        <input type="number" name="retention_period" min="1" required><br>
+
+        <button type="submit">Add Customer</button>
+    </form>
+</body>
+</html>
+

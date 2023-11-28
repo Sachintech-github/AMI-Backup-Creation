@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <!-- Link to external CSS file if needed -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /* Add some colorful styles for the background and text */
+        body {
+            background-color: #f0f8ff; /* Light blue background */
+            color: #008080; /* Teal text color */
+        }
+
+        /* Style the banner heading with a different color */
+        .banner-heading {
+            background-color: #008080; /* Teal background */
+            color: #fff; /* White text color */
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        /* Style the search results list items with alternating background colors */
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li:nth-child(even) {
+            background-color: #e6f7ff; /* Lighter blue background for even rows */
+            padding: 10px;
+            margin: 5px 0;
+        }
+
+        li:nth-child(odd) {
+            background-color: #b3e0ff; /* Slightly darker blue background for odd rows */
+            padding: 10px;
+            margin: 5px 0;
+        }
+
+        /* Style the "Back to Customer List" link as a button */
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #008080; /* Teal background */
+            color: #fff; /* White text color */
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="banner-heading">
+        Search Results
+    </div>
+
+    <h2>Search Results:</h2>
+    <ul>
+        {% for customer in customers %}
+            <li>{{ customer.first_name }} {{ customer.last_name }} - {{ customer.email }}</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Add a link to go back to the main page with the new button style -->
+    <a href="{{ url_for('index') }}" class="back-button">Back to Customer List</a>
+</body>
+</html>
+

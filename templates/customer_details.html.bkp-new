@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Details</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h2 {
+            color: #3498db; /* Blue color for heading */
+        }
+
+        p {
+            color: #2c3e50; /* Dark gray color for paragraph text */
+            margin-bottom: 10px;
+        }
+
+        h3 {
+            color: #27ae60; /* Green color for subheading */
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        /* Style the "Add New Instance" and "Delete" buttons */
+        .add-instance-button,
+        .delete-button {
+            font-size: 16px;
+            padding: 8px 16px;
+            border: 2px solid #27ae60;
+            background-color: #27ae60;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 10px; /* Add some top margin for spacing */
+            margin-right: 10px; /* Add some right margin for spacing */
+        }
+
+        /* Style the checkboxes */
+        .instance-checkbox {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Customer Details:</h2>
+    <p>Name: {{ customer.first_name }} {{ customer.last_name }}</p>
+    <p>Email: {{ customer.email }}</p>
+    <p>AWS Access Key: {{ customer.aws_access_key }}</p>
+    <p>AWS Secret Key: {{ customer.aws_secret_key }}</p>
+
+    <!-- Display instance details if available -->
+    {% if customer.instances %}
+        <h3>Instance Details:</h3>
+        <form id="instanceForm">
+            <ul>
+                {% for instance in customer.instances %}
+                    <li>
+                        <input type="checkbox" class="instance-checkbox" name="instanceId" value="{{ instance.instance_id }}">
+                        Instance ID: {{ instance.instance_id }} - AMI Name: {{ instance.ami_name }}
+                    </li>
+                {% endfor %}
+            </ul>
+            <button type="button" class="delete-button" onclick="deleteSelectedInstances()">Delete</button>
+        </form>
+    {% endif %}
+
+    <!-- Add a button to add a new instance -->
+    <a href="{{ url_for('new_instance', customer_id=customer.id) }}" class="add-instance-button">Add New Instance</a>
+
+    <!-- Add any additional information or formatting as needed -->
+
+    <script>
+        function deleteSelectedInstances() {
+            var form = document.getElementById('instanceForm');
+            var checkboxes = form.querySelectorAll('.instance-checkbox:checked');
+            
+            if (checkboxes.length === 0) {
+                alert('Please select at least one instance to delete.');
+                return;
+            }
+
+            if (confirm('Are you sure you want to delete the selected instances?')) {
+                // You can add code here to handle the deletion on the server side
+                // For example, you can use JavaScript to make an AJAX request to a server endpoint
+                // that handles the deletion of instances.
+            }
+        }
+    </script>
+</body>
+</html>
+
